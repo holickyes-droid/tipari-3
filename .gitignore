@@ -1,8 +1,0 @@
-# Ignorovat soubory s tajnými proměnnými
-.gh_env
-*.gh_env
-
-# Ostatní běžné dočasné soubory
-__pycache__/
-node_modules/
-.DS_Store
