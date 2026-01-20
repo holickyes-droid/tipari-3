@@ -11,10 +11,10 @@
 ## Dokumenty v balíčku (verze 1.7)
 
 - **Souhrn dat (kanonický, uzamčeno)**: `Tipari_Souhrn_Dat_DATA_v1.7.md` (tento soubor)
-- **Předchozí uzamčená verze (archiv)**: `Tipari_Souhrn_Dat_DATA_v1.6.md`
-- **Starší uzamčená verze (archiv)**: `Tipari_Souhrn_Dat_DATA_v1.5.md`
-- **Historická uzamčená verze (archiv)**: `Tipari_Souhrn_Dat_DATA_v1.4.md`
-- **Archiv (další starší verze)**: `Tipari_Souhrn_Dat_DATA_v1.3.md`, `Tipari_Souhrn_Dat_DATA_v1.2.md`, `Tipari_Souhrn_Dat_DATA_v1.1.md`, `Tipari_Souhrn_Dat_DATA_v1.0.md`
+- **Předchozí uzamčená verze (archiv)**: `Tipari_Souhrn_Dat_DATA_v1.5.md`
+- **Starší uzamčená verze (archiv)**: `Tipari_Souhrn_Dat_DATA_v1.4.md`
+- **Historická uzamčená verze (archiv)**: `Tipari_Souhrn_Dat_DATA_v1.1.md`
+- **Starší archivní verze**: `Tipari_Souhrn_Dat_DATA_v1.0.md`
 - **UX specifikace (pracovní)**: `Tipari_UX_SPEC_v1.1.md`
 - **UI specifikace (pracovní)**: `Tipari_UI_SPEC_v0.1.md`
 - **Archiv (původní spojený soubor, včetně historických poznámek)**: `Tipari_Souhrn_Dat_a_Pravidel_DATA_v1.0_LOCKED.md`
@@ -49,9 +49,10 @@
 
 ### 0. Jak s dokumentem pracovat
 
-Tento soubor je **jediný kanonický „souhrn dat“** pro:
-- programátora (co má vzniknout v systému: data, vazby, pravidla)
-- návrháře uživatelského rozhraní (jaká data se sbírají a kde se zobrazují)
+Tento soubor je **jediný kanonický „souhrn dat“** (source of truth) pro:
+- **programátora** (co má vzniknout v systému: data, vazby, stavy, pravidla, audit, integrační body)
+- **UX designéra** (uživatelské toky, rozhodovací body, chybové stavy, maskování a odmaskování informací)
+- **UI designéra** (informační architektura, datové bloky na obrazovkách, viditelnost a oprávnění)
 
 Cíl:
 - odstranit duplicity a rozpory mezi podklady
@@ -103,12 +104,12 @@ V dokumentu se vyskytují některé zkratky – aby nevznikaly nejasnosti, použ
 
 #### 0.4 Změnový log (revize 6.0 → 1.7 – data)
 
-- Dokument je uzamčený jako **verze 1.7 – data** (připraveno jako vstup pro UX).
-- Zrušena **jakákoliv varianta fyzického podpisu** (rezervační smlouva, Souhlas, NDA) – vše se řeší elektronicky přes eSign.
-- Upřesněn a sjednocen **rezervační flow**: nejdřív Souhlas + NDA (auditní stopa + odemknutí dat), až poté rezervační smlouva a následné rozhodnutí developera.
-- Upřesněna pravidla **maskování/odemknutí**: jméno projektu, jméno developera, obrázky a neveřejné dokumenty jsou skryté do okamžiku splnění Souhlas+NDA investorem.
-- Doplněno, že **tiket je vždy svázaný s projektem** a že je potřeba definovat datové bloky pro detail projektu (pro UX).
-- Doplněna a sjednocena pravidla pro **financování, provize, fakturaci (DPH)** a výpočet obratu pro Pool.
+- Dokument je **uzamčený jako verze 1.7 – data** (tj. kanonická data a pravidla jsou připravená pro implementaci).
+- Provedena **konsistenční kontrola**: jednotné názvy stavů, jednotné číselníky, vazby entit odpovídají popsaným tokům.
+- Aktualizace rezervace: doplněn **dvoufázový podpis investora** (1) **Souhlas se sdílením údajů + NDA** → (2) **Rezervační smlouva**, včetně pravidel odmaskování a auditní stopy introdukce.
+- Zrušena a kompletně odstraněna varianta **fyzických podpisů** (rezervační smlouva i Souhlas/NDA).
+- Dopracována vazba **Tiket ↔ Projekt** a minimální datový obsah **detailu projektu** (maskovaný vs. odemknutý režim).
+- Přehled implementace (iterace 1) aktualizován tak, aby odpovídal výše uvedenému toku.
 
 #### 0.5 Přehled implementace – iterace 1 (databáze + stavy + základní formuláře)
 
@@ -817,33 +818,6 @@ Konzistenční pravidla:
 - Developer vidí identitu investora a obchodníka pouze u rezervací, u kterých investor podepsal Souhlas + NDA.
 - Admin může pravidla výjimečně přepsat (override) – vždy s auditní stopou.
 
-##### 10.2.1 Vazba tiketu na projekt a datové bloky pro detail projektu (pro UX)
-
-**Kanonické pravidlo:** Každý **tiket** je vždy součástí jednoho **projektu** (projekt = kontejner, tiket = jednotka nabídky financování).
-
-Aby UX tým mohl navrhnout konzistentní informační architekturu, definujeme minimální datové bloky, které musí být dostupné a zobrazitelné. Konkrétní layout je UX/UI úkol – zde definujeme pouze *co* se musí zobrazit a *kdy* (maskování/odemknutí).
-
-**Karta tiketu (výpis / marketplace / seznam):**
-- Vždy nese kontext projektu: *miniatura projektu (thumbnail)* + *název projektu* + *název developera*.
-- **Před odemknutím (stav „TEASER“):** miniatura = placeholder/blur, název projektu a developer **maskované**.
-- **Po odemknutí (stav „ODEMKNUTO“):** miniatura = reálný obrázek projektu, název projektu a developer **odmaskované**.
-- Na kartě tiketu se zároveň zobrazuje (nemaskované) minimum pro rozhodnutí obchodníka: typ projektu, lokalita (kraj + město), forma financování, objem tiketu, publikační stav, a kapacita (obsazeno/volno).
-
-**Detail projektu (stránka projektu – obchodník / investor v eSign):**
-Sekce, které jsou z obchodního hlediska potřeba zobrazit (minimální rozsah):
-1) **Přehled projektu** – krátký popis, typ projektu, účel/kategorie (pokud používáte tagy), lokalita (kraj, město), klíčové parametry (časový horizont, stav projektu – pokud evidujete).
-2) **Developer** – identita firmy (název, IČO/DIČ pokud používáte), kontaktní osoba a kontakt (pokud je v rozsahu), + informace o obchodníkovi je pouze v kontextu rezervace (nikoliv veřejně v projektu).
-3) **Dokumenty projektu** – seznam dokumentů ke stažení; rozdělení na (a) dokumenty dostupné v TEASERu (vybírá admin), (b) dokumenty dostupné až po odemknutí.
-4) **Galerie / vizuály** – obrázky projektu (maskované do odemknutí).
-5) **Tikety v projektu** – seznam dostupných tiketů + jejich parametry (částka, forma financování, stav, kapacita, termíny).
-6) **Historie změn projektu/tiketů** – auditní stopa změn (min. pro admin + interní potřeby); pro obchodníka stačí „tiket/projekt byl upraven“ + timestamp.
-
-**Maskování v detailu projektu:**
-- Do okamžiku, kdy investor podepíše **Souhlas + NDA**, se v detailu projektu obchodníkovi zobrazují pouze TEASER data (maskované názvy, maskované obrázky, jen vybrané dokumenty).
-- Po podpisu Souhlas+NDA se odmaskují identifikátory (název projektu, název developera, obrázky, plné dokumenty) a vzniká auditní stopa „investor byl představen developerovi platformou“.
-
-Poznámka: Investor nemá účet na platformě – investor vidí projektové informace pouze v rámci eSign procesu (po podpisu Souhlas+NDA, před podpisem rezervační smlouvy).
-
 #### 10.3 Časové limity a SLA (globálně + per tiket/rezervaci)
 
 Výchozí hodnoty:
@@ -1327,6 +1301,51 @@ Poznámka k vazbě na projekt (pro zobrazení):
 - Každý tiket je vždy zobrazen v kontextu projektu.
 - Pro kartičku tiketu v seznamu se používá projektový „Hlavní obrázek projektu (náhled)“ jako thumbnail.
 - Dokud není investorův Souhlas + NDA podepsán, zobrazuje se místo obrázku **placeholder** (stejně jako je maskovaný název projektu).
+
+
+##### 12.5.1 Minimální obsah detailu projektu (datový podklad pro UX/UI)
+
+Tato část definuje **obchodně potřebné bloky informací**, které musí být dostupné pro zobrazení projektu (v platformě i v eSign procesu). Neřeší vzhled ani layout.
+
+**Kontext a zásady:**
+- **Tiket je vždy navázaný na projekt** a na frontu se má zobrazovat **v kontextu projektu** (náhled/thumbnail + odkaz na detail projektu).
+- **Investor nemá přístup do platformy jako uživatel.** Projekt vidí pouze v rámci procesu podpisu ve službě eSign (náhled / přílohy / obsah smluvního balíčku).
+- Detail projektu existuje ve 2 režimech: **maskovaný teaser** a **odemknutý detail**.
+
+**A) Maskovaný detail projektu (teaser režim)**
+- **Kdo vidí:** obchodník (před odesláním rezervační smlouvy investorovi i po odeslání, dokud investor nepodepíše Souhlas + NDA).
+- **Účel:** dát obchodníkovi dostatek informací, aby se rozhodl, zda má smysl zahájit rezervaci, ale současně chránit citlivá data developera/projektu.
+- **Povinné bloky informací:**
+  1) **Identita projektu a developera (maskovaná):** anonymizovaný název projektu (např. „Projekt #123“) a anonymní označení developera.
+  2) **Lokalita:** kraj + město.
+  3) **Typ projektu:** výběr z typů (Rezidenční, Logistika, Komerční, Smíšený, Retail, Ubytovací zařízení, Pozemky, Energetika, Ostatní).
+  4) **Stručný popis (teaser):** zkrácená/anonymizovaná verze.
+  5) **Tikety v projektu:** seznam tiketů s klíčovými parametry (částka, předpokládaný výnos, splatnost, forma financování) – bez odhalení identity developera/projektu.
+  6) **Dokumenty „předrezervační“:** pouze dokumenty, které administrátor ručně označí jako předrezervační (např. obecné info / anonymizované podklady).
+  7) **Obrázky:** místo hlavního obrázku a galerie se zobrazuje placeholder.
+
+**B) Odemknutý detail projektu (plný režim)**
+- **Kdo vidí:**
+  - obchodník **od okamžiku, kdy investor podepíše Souhlas + NDA** (viz kapitola 4.5),
+  - investor **v eSign** při podpisu rezervační smlouvy (po podpisu Souhlasu + NDA),
+  - developer a administrátor vždy.
+- **Účel:** umožnit informované podepsání rezervační smlouvy a následné jednání.
+- **Povinné bloky informací:**
+  1) **Identita projektu (plná):** název projektu.
+  2) **Identita developera (plná):** název developera + základní profilové údaje (alespoň: název, identifikační číslo osoby, sídlo; kontaktní údaje dle nastavení).
+  3) **Kompletní popis projektu:** plná verze textů.
+  4) **Lokalita:** kraj + město + (volitelně) přesná adresa/parcelní identifikace.
+  5) **Tikety v projektu:** plný seznam tiketů a jejich parametry.
+  6) **Dokumenty projektu:** všechny dokumenty podle nastavení viditelnosti (včetně podkladů pro due diligence), s jasným rozlišením „předrezervační“ vs. „odemčené po Souhlasu + NDA“.
+  7) **Obrázky a galerie:** hlavní obrázek + galerie.
+
+**C) Odkaz z tiketu na projekt**
+- Každý tiket má UI vazbu na rodičovský projekt:
+  - **thumbnail** = hlavní obrázek projektu (v teaser režimu placeholder),
+  - **odkaz na detail projektu** musí fungovat i v teaser režimu (otevře se maskovaný detail),
+  - v odemknutém režimu se otevře plný detail.
+
+Poznámka: Viditelnost je řízená jednotně (maskování/odmaskování) – nesmí vzniknout stav, kdy je odmaskovaný obrázek, ale název projektu je stále maskovaný (a naopak).
 
 #### 12.6 Tiket / nabídka
 
