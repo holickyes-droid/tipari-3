@@ -89,13 +89,13 @@ Tipconnecta je platforma pro **zprostředkování investičních příležitost�
 - developer viděl jen relevantní informace ve správný čas
 - platforma měla kontrolu nad pravidly, časovými limity a provizemi
 
-#### 1.2 Hodnota pro uživatele (hlavní přínosy)
+#### 1.2 Hodnota pro uživatele (hlavní přínosy) - poznámka: placeholdery v případě obrázků chci aby ty obrázky byly rozmazané, aby to graficky vypadlo pěkněji.
 
 - **Obchodník (tipař/broker):** pracuje s nabídkou tiketů v režimu **maskovaných detailů** (např. název projektu, název developera, **hlavní obrázek projektu i galerie** a většina dokumentů jsou skryté / nahrazené placeholderem). Plné detaily se mu odemknou až ve chvíli, kdy jeho investor **podepíše Souhlas se sdílením údajů + NDA (pro platformu)**. Tím vzniká právní a auditní stopa introdukce a zároveň se udržuje férová konkurence na tiketech.
 - **Developer:** získá přístup k distribuční síti obchodníků. Identita investora a obchodníka se mu zpřístupní **po potvrzení Souhlasu se sdílením údajů + NDA investorem** (tedy ještě před podpisem rezervační smlouvy developerem). Plně podepsanou rezervační smlouvu obdrží až po podpisu investora a následném potvrzení/podpisu developera.
 - **Platforma (administrátor):** správa pravidel a parametrů (časové limity, kapacity rezervací, splatnosti), finanční vypořádání (provize, faktury), audit a řešení sporů. Platforma **neověřuje investory** ani **neschvaluje jednotlivé rezervace** – nastavuje rámec, eviduje průběh a může kdykoliv zasáhnout (override) s auditní stopou.
 
-#### 1.3 Přehled platformy
+#### 1.3 Přehled platformy (poznámka - 48 hodin běží jednotně k úkonu podpisů Souhlasu, NDA i Rezervační smlouvy a začíná běžet SLA již ve chvíli, kdy pošle obchodník proces na investora)
 
 Základní tok je:
 1) developer (nebo obchodník jako „lead“) zadá projekt a tiket k publikaci
@@ -230,7 +230,7 @@ Kanonický cíl procesu:
 - řídit férové pořadí rezervací na tiketu podle času podpisu investora,
 - umožnit developerovi rezervaci potvrdit nebo zamítnout s odůvodněním.
 
-Proces (kanonická flow):
+Proces (kanonická flow): (poznámka: obchodník musí mít možnost při rezervaci i založit nového investora a přidat ho tak do své databáze-nechceme ho odvádět z rezervačního procesu když už v něm začal)
 
 1) **Obchodník** na detailu tiketu vytvoří rezervaci pro vybraného investora (z interní evidence obchodníka).
 
@@ -390,7 +390,7 @@ Poznámky:
 - počty slotů musí být upravitelné administrátorem
 - úrovně nejsou „provizní pool“; jsou to úrovně přístupu a kapacity
 
-#### 8.2 Typy projektů (kanonický seznam)
+#### 8.2 Typy projektů (kanonický seznam)(Poznámka: když se zadá položka Ostatní, tak by mělo vyběhnout pole, kam se napíše ve 2 slovech maximálně, o jaký jiný typ projektu se jedná. Tak snadno zajistíme, že bude platforma univerzální pro další typy projektů.)
 
 **Kanonický (business) seznam pro Tipconnecta (B2B)** – používá se ve formulářích, filtrech a statistikách:
 - Rezidenční
@@ -412,7 +412,7 @@ Poznámky:
 
 Toto je **volitelné tagování** (není to primární typ projektu). Používá se pro filtrování, vysvětlení účelu financování a pro lepší matching.
 
-**Doporučený kanonický seznam tagů (sjednoceno napříč podklady):**
+**Doporučený kanonický seznam tagů (sjednoceno napříč podklady):** (Poznámka - stejně jako u typu projektu zadat možnost, že se při zadávání projektu do systému přidá i jakýkoliv tag)
 - Nákup nemovitosti (buy & hold)
 - Výstavba
 - Rekonstrukce
@@ -429,7 +429,7 @@ Pravidla:
 - Tagy mohou být vícenásobné, ale doporučuje se max. 3 na jeden projekt/tiket.
 - „Prodej projektu“ je **transakční typ** – pokud ho nechceme v první verzi, vypnout (nezobrazovat v UI).
 
-#### 8.4 Forma financování (kanonické pole na tiketu)
+#### 8.4 Forma financování (kanonické pole na tiketu)(Poznánka: sjednotit názvosloví pro Forma financování. Dále přidat Formu financování jako Ostatní, kam se bude dát zadat zase ve 2 slovech max. jiná forma financování než je uvedena v kanonických datech)
 
 V podkladech se míchají pojmy „forma financování“ a „forma investice“ (instrument). Pro Tipconnecta (MVP) používáme **jedno pole**: **Forma financování**.
 
@@ -489,7 +489,7 @@ Abychom nemíchali pojmy, rozlišujeme:
 
 > Poznámka k právní jistotě: položka „Směnka“ je zde vedena jako volitelná forma zajištění, ale finální právní posouzení a případné úpravy textů/dokumentů proběhnou mimo tento souhrn dat (právní architektura).
 
-#### 8.6 Využití prostředků – kanonický procentuální rozpad
+#### 8.6 Využití prostředků – kanonický procentuální rozpad (Poznámka: přidat i položku Ostatní - kam se bude dát ručně definovat ve 2 slovech max, o jaké využití prostředků se jedná).
 
 Použijeme **procentuální rozpad (součet = 100 %)**. Kategorie (sjednoceno napříč podklady):
 - Nákup nemovitosti
@@ -638,7 +638,7 @@ Tyto důvody slouží k:
 - vysvětlení ukončení rezervace/tiketu,
 - exportům a interním statistikám.
 
-**A) Rezervace – důvod ukončení**
+**A) Rezervace – důvod ukončení** (Poznámka: když je na tiketu aktivní rezervace, tak SLA Tiket expiroval (konec publikačního okna) nesmí pro tuto rezervaci platit a nesmí tu rezervaci přerušit)
 - Profinancováno jiným investorem (automaticky)
 - Investor odstoupil / nepokračuje
 - Developer odmítl investora
