@@ -1205,7 +1205,7 @@ Kanonické rozhodnutí pro ochranu osobních údajů:
 
 ---
 
-#### 12.5 Projekt
+#### 12.5 Projekt (poznámka: zde musí být možnost aby zadavatel projektu a tiketů mohl projekt popsat detailně a ne jen pár slovy)
 
 Projekt je „kontejner“ pro strukturu a dokumentaci (více tiketů může patřit pod jeden projekt).
 
@@ -1273,7 +1273,7 @@ Tato část definuje **obchodně potřebné bloky informací**, které musí bý
 
 Poznámka: Viditelnost je řízená jednotně (maskování/odmaskování) – nesmí vzniknout stav, kdy je odmaskovaný obrázek, ale název projektu je stále maskovaný (a naopak).
 
-#### 12.6 Tiket / nabídka
+#### 12.6 Tiket / nabídka 
 
 | Pole | Typ / formát | Povinnost | Vyplňuje | Kdo vidí | Validace / poznámka |
 |---|---|---:|---|---|---|
@@ -1532,7 +1532,7 @@ Doporučené (neblokuje v první verzi, ale zvyšuje kvalitu):
 - znalecký posudek nebo zdroj ocenění
 - dokumenty projektu
 
-#### 15.2 Co blokuje odeslání rezervace k podpisu investorovi
+#### 15.2 Co blokuje odeslání rezervace k podpisu investorovi (poznámka: Chybí potvrzení obchodníka, že má právní důvod investora evidovat a kontaktovat. - toto úplně vypustíme)
 
 - Neexistuje volný slot obchodníka (obchodník je na svém limitu otevřených rezervací).
 - Tiket není ve stavu **Zveřejněný** (je rozpracovaný, čeká na schválení, je skrytý nebo expirovaný).
@@ -1916,7 +1916,7 @@ V první verzi doporučujeme kombinaci:
 - shoda typů zajištění (pokud tiket je zajištěný)
 - poměr financování k hodnotě zástavy ≤ limit investora
 
-#### 18.3 Výstupy matchingu
+#### 18.3 Výstupy matchingu (poznámka: matching chceme vidět na tiketu nebo tam kde to dává smysl. Z pohledu UX a UI to musí být udělané tak, že matching může být u jednoho tiketu i třeba v desítkách investorů)
 
 V rozhraní obchodníka doporučujeme tyto výstupy:
 - **Seznam investorů** se slovním hodnocením: „Vysoká shoda / Střední shoda / Nízká shoda / Mimo kritéria“.
@@ -1969,7 +1969,7 @@ Auditní stopa (minimum):
 Poznámka k právní ochraně platformy:
 - auditní stopa „introdukce“ vzniká již po podpisu **Souhlasu + NDA** investorem, protože v té chvíli se developerovi odhalí identita investora i obchodníka.
 
-### 20. Potvrzená rozhodnutí a parametry (uzamčeno)
+### 20. Potvrzená rozhodnutí a parametry (uzamčeno) (poznámka: co je toto dole za kapitoly? není to nějaká sada pracovních dat která tu být nemusí? jestli tu být nemusí, tak vymazat co tady nemá být - nechceme vidět pracovní data a zbytek dopracovat jako je to až doposud)
 
 #### 20.1 Rozhodnutí uzavřená v této verzi
 
