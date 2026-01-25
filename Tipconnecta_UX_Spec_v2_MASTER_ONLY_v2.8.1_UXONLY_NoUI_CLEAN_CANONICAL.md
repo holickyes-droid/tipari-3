@@ -1139,7 +1139,7 @@ Analytické eventy:
 
 ---
 
-# Obrazovky
+# Obrazovky (poznámka: celé hlavní menu chci aby bylo nahoře a ne na boku stránek).
 
 ## [B-RES-01] Moje rezervace (seznam)
 
