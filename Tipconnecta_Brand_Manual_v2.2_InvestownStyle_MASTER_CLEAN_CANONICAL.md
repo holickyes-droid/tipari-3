@@ -58,6 +58,7 @@ Zjednodušujeme a standardizujeme proces introdukce a rezervace investic:
 - „**control‑first**“ přístup: chráníme citlivá data a proces (maskování, schvalování, role),
 - důraz na **UX a čitelnost** (Investown‑style: čistota, velké radiusy, přehledné karty),
 - standardizované workflow a **auditní stopa**.
+- (poznámka: brokerům chceme nabídnout aby si přivydělali hodně peněz i v zaměstnání, které zrovna vykonávají a to inkognito aby na to jejich zaměstnavatel nepřišel. Zároveň je chráníme před nevyplacenými provizemi u developerů, máme tým advokátů, kteří hlídají, aby nám developer vždy zaplatil a aby v budoucnu nezneužíval jejich investory pro obchody bokem u kterých už oni nejsou. Zároveň je zastupujeme při jednáních s developerem a dáváme jim informace co se děje a jak se obchody vyvíjí. Férově dělíme provize a nevytváříme pyramidové schéma provizí. Dáváme jim možnost si i vydělat tím, že nás spojí s developerem a přinesou projekt. Developery a jejich projekty sami prověřujeme jestli jsou životaschopné a jestli jejich investor nevstupuje do problémového projektu).
 
 ### Brand promise
 **„V Tipconnecta vždy víte, kde se váš deal nachází – a že proces proběhne bezpečně, přehledně a férově.“**
