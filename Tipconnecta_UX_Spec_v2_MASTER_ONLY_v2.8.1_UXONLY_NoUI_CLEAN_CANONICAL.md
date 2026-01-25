@@ -63,9 +63,9 @@ Tento dokument slučuje a sjednocuje specifikace pro EPIC 1–10 + EPIC 12 (hand
 - **Multi‑user developer (MVP must‑have):** více uživatelů může patřit pod jednu developer organizaci (min. role: Owner / Member / Finance).
 
 ### Provize (komunikace v aplikaci)
-- Celková provize: **5 %** z finální profinancované částky.
+- Celková provize: **5 %** z finální profinancované částky. (poznámka: výši provize může zadávat administrátor u každého tiketu individuálně)
 - Split: **platforma 50 %**, **broker 1 25 %**, **broker 2 25 %**.
-- Pokud neexistuje broker 2, jeho podíl přechází na brokera 1 (tj. broker 1 = 50 %).
+- Pokud neexistuje broker 2, jeho podíl přechází na brokera 1 (tj. broker 1 = 50 %).(poznámka: výši podílu provize může zadávat administrátor u každého tiketu a brokera individuálně. součet všech stran musí dávat 100% )
 - V aplikaci komunikujeme částky **primárně bez DPH**; pokud se na faktuře uplatňuje DPH, zobrazí se rozpad v detailu faktury (podle nastavení/parametrů).
 
 ### eSign & remindery
@@ -99,7 +99,7 @@ Tipconnecta je B2B platforma, která propojuje **brokery (obchodníky)** a **dev
 
 ---
 
-## 2) Odpovědi, které už máme z dat (nemusíme se ptát)
+## 2) Odpovědi, které už máme z dat (nemusíme se ptát) (poznámka: proč jsou tady pracovní data? zakomponuj je do tohoto souboru tak, aby to nebyla pracovní data a vyčisti tento soubor o zbytečné připomínky a komentáře)
 - **Investor není uživatelský účet** a je veden jako „záznam v evidenci obchodníka“, vždy pod konkrétním brokerem.  
 - Rezervace má **dvoufázové odmaskování** (po Souhlasu+NDA se odemknou identity a detail; aktivace až po podpisu rezervační smlouvy investorem i developerem).  
 - Stavy rezervace zahrnují „odesláno investorovi“, „Souhlas+NDA potvrzeny“, „podepsáno investorem ve frontě / v kapacitě“, „aktivní“, „financování potvrzeno“.  
@@ -108,7 +108,7 @@ Tipconnecta je B2B platforma, která propojuje **brokery (obchodníky)** a **dev
 
 ---
 
-## 3) Nejasnosti (otázky na ownera) – všechny dotazy, které ještě blokují finální UX
+## 3) Nejasnosti (otázky na ownera) – všechny dotazy, které ještě blokují finální UX (poznámka: vyřeš všechny otázky. chceme abychom měli nad platformou úplnou kontrolu z pohledu administrátora a aby byla UX a UI profesionálně navržená, hlavně proobchodně, výstižně a jednoduše ovladatelná).
 > Níže jsou **jen** rozhodnutí, která nejsou explicitně v datech, nebo jsou „produktová volba“.  
 > Pokud u bodu uvádíme „navrhujeme“, znamená to, že umíme dodat doporučení jako default.
 
@@ -136,7 +136,7 @@ Tipconnecta je B2B platforma, která propojuje **brokery (obchodníky)** a **dev
 
 ---
 
-## 4) Předpoklady (co doplňujeme my – lze změnit)
+## 4) Předpoklady (co doplňujeme my – lze změnit) (poznámka: jakmile opravíš kanonický soubor vstupních dat, tak zkontroluj a oprav i tento dokument jestli vše sedí s tím co máme uvedeno v kanonickém souboru vstupních dat a zde se to nikterak nevylučuje)
 - Telefon při registraci je **povinný** (pilot/KYC, rychlý kontakt).  
 - Bez dokončení „legal onboarding“ pro danou roli (potvrzení smluvních dokumentů) uživatel neuvidí marketplace.  
 - Admin schvalování: 1 admin (single admin účet), rozšiřitelné později.
@@ -681,7 +681,7 @@ Persona požaduje: tvrdé filtry (20M+, zástava 1. pořadí, zápůjčka/úvěr
 - Pokud je projekt/tiket ve stavu **maskovaný** (před podpisem Souhlasu se sdílením údajů / NDA).
 - Broker potřebuje vidět „teaser“ bez odhalení identity.
 
-### Co stránka obsahuje
+### Co stránka obsahuje (poznámka: tady by bylo fajn u projektu ukázat i celkový součet provizí u všech tiketů)
 - Breadcrumb: Tikety / Projekt (maskovaný)
 - Název: maskovaný alias (např. „Projekt #123“)
 - Teaser text (krátký popis bez citlivých údajů)
@@ -742,7 +742,7 @@ Analytické eventy:
 
 ---
 
-## [BRK-220] Rezervace — Modal (step 1/2) „Zahájit rezervaci“
+## [BRK-220] Rezervace — Modal (step 1/2) „Zahájit rezervaci“ (poznámka: bylo by fajn vést záznamy o rozpracovaných rezervacích a dát možnost obchodníkům se k nim rychle vrátit a dokončit je)
 
 ### Cíl
 Vybrat investora pro konkrétní tiket a připravit odeslání balíku k podpisu.
@@ -840,7 +840,7 @@ Potvrdit, že broker má souhlas klienta a spustit rezervaci (držení kapacity)
 - Nadpis: **Potvrzení rezervace (2/2)**
 - Podnadpis: „Zkontrolujte údaje před odesláním k podpisu.“
 
-#### Co investor podepíše (1 balík)
+#### Co investor podepíše (1 balík)(poznámka: v prostředí Esign investor podepisuje dokumentaci ve 2 krocích, ale v jednom okně. To znamená, že první podepíše Souhlas a NDA a pak se mu teprve zobrazí Rezervační smlouva)
 Seznam dokumentů v balíku (minimálně):
 - Souhlas se sdílením údajů
 - NDA (Dohoda o mlčenlivosti)
@@ -970,7 +970,7 @@ Analytické eventy:
 
 ---
 
-## [BRK-250] Pool — Přehled (MVP)
+## [BRK-250] Pool — Přehled (MVP)(poznámka: chceme ukázat jak si stojí obchodník i oproti jiným obchodníkům, takže mu ukázat kolikátý je v pořadí v případě jeho objemu investic a podle toho vytvářet žebříček, ale bez údajů jiných obchodníků, takže anonymě)
 Cíl uživatele: Vidět, jak si stojím v bonusovém poolu a co zlepšit.
 Cíl byznysu: Zvýšit retenci a motivovat aktivitu.
 Primární CTA / sekundární CTA:
@@ -1687,7 +1687,7 @@ Tento EPIC doplňuje přesně tyto 3 oblasti do broker části marketplace.
 
 # Obrazovky (EPIC 4)
 
-## [BRK-200] Tikety — Přehled (Broker)
+## [BRK-200] Tikety — Přehled (Broker) (Poznámka: vlož i do kanonických dat hlídacího psa, který bude sloužit obchodníkovi aby mu chodily email s vhodnými projekty a párováním investorů, které on si vybere, že chce sledovat. Tyto emailu mu musí chodit v nějakém časovém intervalu opakovaně. Toto zakomponuj do platformy kam se to má umístit - nechám na tobě jestli to bude dashboard nebo někde jinde).
 
 > Pozn.: V UI se tato sekce jmenuje **Tikety**. Interně jde o „Marketplace“ (nabídka investičních příležitostí pro brokera).
 
@@ -1745,7 +1745,7 @@ Volitelná CTA:
 
 ---
 
-## Seznam tiketů (row-cards)
+## Seznam tiketů (row-cards) (poznámka: do karty tiketů chci zakomponovat i matching nějakou formou - možná vyskovacího okna a posudku k náhledu s komentářem od admina platformy s možností odkazu na toho, kdo vypracoval ten znalecký posudek, to stejné pak do detailu projektu - tiketu. Tikety chci zobrazovat jako karty pod sebou a přepínat mezi režimy, že může je obchodník vidět i jako 3 karty vedle sebe).
 
 Každý tiket je řádková karta se 3 zónami:
 
@@ -1835,16 +1835,16 @@ Každý tiket je řádková karta se 3 zónami:
 #### 1) Galerie projektu (hero)
 - Velký hlavní obrázek (cover) + náhledy dalších fotek.
 - CTA overlay: **Zobrazit galerii**
-  - otevře modal s galerií (lightbox; může být samostatný komponent / modal).
+  - otevře modal s galerií (lightbox; může být samostatný komponent / modal). (Poznámka: nechci modál galerii, ale aby se měnil ten hlavní velký obrázek a pod ním galerie obrázků na ktery kdyz se klikne, tak se změní ten hlavní obrázek nad galerií obrázků pod ním + posuvníky u velkého obrázku a u galerie obrázků).
 - Pokud je projekt maskovaný:
-  - obrázky jsou skryté nebo rozmazané (placeholder),
+  - obrázky jsou skryté nebo rozmazané (placeholder), (poznámka: obrázky jen rozmazat a neskrývat)
   - CTA galerie může být disabled nebo otevře pouze placeholder.
 
 #### 2) Rychlé KPI (pod galerií / v hlavičce sekce)
 - Objem, Výnos p.a., Splatnost, Odměna brokera (dle finálního layoutu).
 - KPI odpovídají hodnotám v kartě tiketu.
 
-#### 3) Projekt
+#### 3) Projekt (poznámka: chci aby tam byla i možnost nechat admina a ti co zadávají projekt - popsat projekt detailněji)
 - Krátký popis projektu (1–3 odstavce).
 - Minimum investice (např. 100 000 Kč) + lokalita.
 - Pozn.: u maskovaného stavu se může zobrazit pouze teaser text.
@@ -1892,7 +1892,7 @@ Tabulka / grid klíčových parametrů:
 #### A) Stav financování / kapacity
 Karta obsahuje:
 - „Zbývá k profinancování“ (částka)
-- Naplněnost kapacity (%) + progress bar
+- Naplněnost kapacity (%) + progress bar (poznámka: nevím jestli progress bar bude vhodný grafický doplněk protože každý projekt má určitý počet tiketů a to by se mělo znázornovat).
 - Obsazení tranší (např. 2/3) + „ve frontě“ (pokud trackujeme)
 - Odměna brokera (bez DPH)
 - Expirace tiketu (datum)
@@ -2060,7 +2060,7 @@ Analytické eventy:
 - `brk_commission_list_viewed` {broker_user_id}
 - `brk_commission_row_opened` {provizni_pripad_id, status}
 ---
-## [BRK-510] Podklady k fakturaci (Broker) — Detail + nahrání faktury
+## [BRK-510] Podklady k fakturaci (Broker) — Detail + nahrání faktury (poznámka: zde by měl mít admin možnost zadat i předmět fakturace. Dále řešíme i fakturaci z pool programu? jestli ne, musí se to doplnit)
 Cíl uživatele:
 - Rychle a bez chyb vystavit fakturu a nahrát ji.
 Cíl byznysu:
@@ -3404,7 +3404,7 @@ Analytické eventy:
 
 ---
 
-## EPIC 10 — Pre‑login web (akvizice) — landingy, proces, důvěra
+## EPIC 10 — Pre‑login web (akvizice) — landingy, proces, důvěra (poznámka: Pre-login web nechci teď vůbec řešit, ale je potřeba s ním počítat v případě toho, jak se bude uživatel přepínat mezi veřejnou částí a platformou za loginem když bude přihlášený).
 
 ### Cíl EPICu
 - Dodat **pre‑login** sekci (veřejně sdílitelnou), která vysvětlí *co Tipconnecta je / není*, jak funguje proces (maskování → eSign → kapacita → jednání → financování) a převede kvalifikované zájemce na **self‑signup** (s admin approval) nebo na **onboarding call**.
@@ -3610,7 +3610,7 @@ Analytické eventy:
 
 ---
 
-## [WEB-030] Jak to funguje — proces a lhůty
+## [WEB-030] Jak to funguje — proces a lhůty (Poznámka: FAQ chci zakomponovat až do platformy po přihlášení)
 
 Cíl uživatele:
 Pochopit end‑to‑end tok (projekt → tiket → rezervace → podpisy → kapacita → jednání → financování → provize).
